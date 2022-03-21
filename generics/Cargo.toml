@@ -1,0 +1,13 @@
+[package]
+name = "generics"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+mockmail = { path = "../", version = "0.1.0"}
+log = "0.4.14"
+anyhow = "1.0.41"
+async-std = { version = "1.10.0", features = ["attributes"] }
+async-trait = "0.1.52"
