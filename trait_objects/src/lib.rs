@@ -6,16 +6,6 @@ pub trait SendEmail {
     async fn send(&self, email: Email) -> Result<(), anyhow::Error>;
 }
 
-impl dyn SendEmail {
-    pub fn new() -> Result<RealClient, anyhow::Error> {
-        RealClient::new()
-    }
-
-    pub fn mock() -> Result<MockClient, anyhow::Error> {
-        MockClient::new()
-    }
-}
-
 #[async_trait]
 impl SendEmail for RealClient {
     async fn send(&self, email: Email) -> Result<(), anyhow::Error> {
@@ -41,7 +31,7 @@ mod tests {
 
     #[async_std::test]
     async fn test_email_service() {
-        let client = <dyn SendEmail>::mock().unwrap();
+        let client = MockClient::new().unwrap();
 
         let res = email_service(&client).await;
 
