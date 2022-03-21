@@ -2,7 +2,7 @@ use async_trait::async_trait;
 use mockmail::{send_mock_email, send_real_email, Email, MockClient, RealClient};
 
 #[derive(Clone)]
-pub struct EmailClient<T: Send + std::marker::Sync> {
+pub struct EmailClient<T: std::marker::Send + std::marker::Sync> {
     pub client: T,
 }
 
