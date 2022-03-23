@@ -10,7 +10,7 @@ You can find the relevant code in the identically named workspaces above.
 
 ## Using enums
 
-Our mock service should take either a `RealClient` which sends a *real* email in production or a `MockClient`  which sends a *mock* email while testing. An enum with a `Real` and a `Mock` variant is a natural way to achieve this:
+Our email service should take either a `RealClient` which sends a *real* email in production or a `MockClient`  which sends a *mock* email while testing. An enum with a `Real` and a `Mock` variant is a natural way to achieve this:
 
 ``` rust
 pub enum EmailClient {
@@ -31,7 +31,7 @@ pub enum EmailClient {
 
 This way the additional `Mock` variant does compile for unit testing. However, the `Real` variant is the only variant for a release build, leading to (slightly) better runtime performance.
 
-Finally, our mock service takes an `EmailClient` as follows:
+Finally, our service takes an `EmailClient` as follows:
 
 ``` rust
 pub async fn email_service(client: &EmailClient) -> Result<(), anyhow::Error> {
@@ -63,7 +63,7 @@ On the one hand, static dispatch has better runtime performance through monomorp
 
 ### Using generics
 
-In this case, the mock service is generic over parameter `T` with trait bound `SendEmail`:
+In this case, the service is generic over parameter `T` with trait bound `SendEmail`:
 
 ``` rust
 pub async fn email_service<T: SendEmail>(client: &T) -> Result<(), anyhow::Error> {
